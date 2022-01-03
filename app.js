@@ -79,11 +79,16 @@ function cardPopup() {
     deletion.style.background = "#cdb4db";
     deletion.innerHTML = "Delete";
     deletion.style.marginLeft = "62px";
+
+    change.addEventListener('click', (e) => {
+        if (this.read == 'Yes') {
+            this.read = 'No'
+            card.innerHTML = this.info();
+        }
+    });
+
+    deletion.addEventListener('click', (e) => {
+        card.remove();
+    });
+
 }
-
-change.addEventListener('click', (e) => {
-    if (this.read == "Yes") {
-        this.read = "No"
-    }
-});
-
