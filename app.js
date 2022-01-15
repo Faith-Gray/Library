@@ -16,17 +16,35 @@ overlay.addEventListener('click', (e) => {
 
 let myLibrary = [];
 
-function Book(name, author, pages, read) {
-    this.name = document.querySelector('#name').value;
-    this.author = document.querySelector('#author').value;
-    this.pages = document.querySelector('#pages').value;
-    this.read = document.querySelector('#completed').value;
-    this.info = function() {
+//constructor version
 
-        return ("Title: " + this.name + "<br>" + "Author: " + this.author + "<br>" + 'Pages: ' + this.pages + "<br>" + 'Completed: ' + this.read) + "<br>" + "<br>";
+// function Book(name, author, pages, read) {
+//     this.name = document.querySelector('#name').value;
+//     this.author = document.querySelector('#author').value;
+//     this.pages = document.querySelector('#pages').value;
+//     this.read = document.querySelector('#completed').value;
+//     this.info = function() {
+
+//         return ("Title: " + this.name + "<br>" + "Author: " + this.author + "<br>" + 'Pages: ' + this.pages + "<br>" + 'Completed: ' + this.read) + "<br>" + "<br>";
+//     }
+// }
+
+//class version
+
+class Book {
+    constructor(name, author, pages, read) {
+        this.name = document.querySelector('#name').value;
+        this.author = document.querySelector('#author').value;
+        this.pages = document.querySelector('#pages').value;
+        this.read = document.querySelector('#completed').value; 
+    }
+    info(){
+        return ("Title: " + this.name + "<br>" + "Author: " + this.author + "<br>" + 'Pages: ' + this.pages + "<br>" + 'Completed: ' + this.read) + "<br>" + "<br>" ;
+    
     }
 }
 
+let Nbook
 const newBook = new Book('Cant Hurt Me', 'David Goggins', '200', 'completed');
 
 function addBookToLibrary() {
@@ -38,15 +56,16 @@ function addBookToLibrary() {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
-    Book();
+    Nbook = new Book();
     addBookToLibrary();
     overlay.classList.remove('active');
     popUp.classList.remove('active');
     form.reset();
     cardPopup();
+
 });
 
-
+// 
 
 function cardPopup() {
     const card = document.createElement('div');
@@ -60,7 +79,7 @@ function cardPopup() {
     card.style.color = "white";
     card.style.fontSize = "25px";
     card.style.padding = "10px";
-    card.innerHTML = this.info();
+    card.innerHTML = Nbook.info();
     card.style.lineHeight = "2";
     card.style.textShadow = "1px .5px 0 #cdb4db";
     
@@ -80,12 +99,12 @@ function cardPopup() {
     deletion.innerHTML = "Delete";
     deletion.style.marginLeft = "62px";
 
-    change.addEventListener('click', (e) => {
-        if (this.read == 'Yes') {
-            this.read = 'No'
-            card.innerHTML = this.info();
-        }
-    });
+    // change.addEventListener('click', (e) => {
+    //     if (this.read == 'Yes') {
+    //         this.read = 'No'
+    //           card.innerHTML = this.info();
+    //     }
+    // });
 
     deletion.addEventListener('click', (e) => {
         card.remove();
